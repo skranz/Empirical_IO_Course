@@ -10,10 +10,10 @@ We also have a mini-excursion to machine learning in exercise sheet 4 and 5. Mai
 
 If you like R programming, take a look at the folder `rtutor` that contains RTutor problemsets, that allow you to explore the contents of the early chapters in an interactive fashion. The RTutor problemsets 1a to 1c  mainly deal with the question of how we can estimate a very simple demand function from field data. You learn very slowly with simple Monte-Carlo simulations about endogeniety problems in this context and how one can attempt to solve them.
 
-See [https://github.com/skranz/RTutor](https://github.com/skranz/RTutor) for more details about RTutor.
+See [https://github.com/skranz/RTutor](https://github.com/skranz/RTutor) for more details about RTutor and links to other problem sets.
 
 
-To install all required R packages run the code in `install packages.r` in the `r`  folder.
+To install the required R packages for this course, run the code in `install packages.r` in the `r` folder.
 
 The folder `slides` contains some lecture slides. Often I do some live programming in the class. The code is either part of the RTutor problem sets (early slides) or in the folder `r` (later slides). Alternatively, I show details on the black board. So stand-alone the slides have only limited use.
 
@@ -28,7 +28,7 @@ The folder `slides` contains some lecture slides. Often I do some live programmi
 
 - The exercises and sample solutions in the `exercise` folder have been created by Martin Kies with some input by me.
 
-- The data folder, contains a set about car sales, which was made available on [Frank Verbooven's Website](https://sites.google.com/site/frankverbo/data-and-software).
+- The `data` folder contains a set about car sales, which was made available on [Frank Verbooven's website](https://sites.google.com/site/frankverbo/data-and-software).
 
 - The slides `EmpIO_2b.pdf` and the corresponding R code is based on [this Vignette](https://cran.r-project.org/web/packages/mlogit/vignettes/Exercises.pdf) of the R package `mlogit` by Yves Croissant who has adapted the R code from original Matlab exercises by Kenneth Train. (The R package is distributed under a GPL License)
 
