@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Illustration: When Volkswagen buys Opel&hellip;</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>Illustration: When Volkswagen buys Opel&hellip;</h1>
+
+<p>How would Volkswagen change its car prices of different brands if it bought Opel? Here is a visualization for a quantitative prediction based on a model with nested logit demand and Bertrand competition that has been previously estimated with historical sales data for different European markets. </p>
+
+<!-- MotionChart generated in R 3.0.2 by googleVis 0.4.7 package -->
+
+<!-- Thu Apr 17 15:28:03 2014 -->
+
+<!-- jsHeader -->
+
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataMergerSimulationNestedLogit () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ "alfa romeo GTV",
+new Date(0000,0,1),
+0.9821962714,
+9.261503746e-05,
+"Fiat",
+3.233357718e-05,
+1,
+0.01388517323,
+105.9269272,
+0.01446243887 
+],
+[
+ "BMW 3",
+new Date(0000,0,1),
+0.7776608467,
+0.001990122792,
+"BMW",
+0.006991221653,
+2,
+0.01002821459,
+32529.3224,
+0.01691698073 
+],
+[
+ "BMW 5",
+new Date(0000,0,1),
+1.284738302,
+1.001699297e-05,
+"BMW",
+0.003405364545,
+3,
+0.002884308534,
+12613.79721,
+0.002955754945 
+],
+[
+ "citroen XM",
+new Date(0000,0,1),
+1.061240673,
+1.911957399e-05,
+"Peugeot",
+6.374055109e-05,
+4,
+0.0140726813,
+203.8190253,
+0.01420462603 
+],
+[
+ "citroen xantia",
+new Date(0000,0,1),
+0.6988294721,
+0.0005690204135,
+"Peugeot",
+0.0003817117776,
+5,
+0.03765939742,
+1265.948854,
+0.04021053017 
+],
+[
+ "daihatsu domino",
+new Date(0000,0,1),
+0.2980678082,
+0.0004142642226,
+"Toyota",
+0.0004105340161,
+6,
+0.02128378071,
+1338.23442,
+0.02207704091 
+],
+[
+ "daihatsu applause",
+new Date(0000,0,1),
+0.5692903399,
+0.000349904147,
+"Toyota",
+2.370153621e-05,
+7,
+0.03819833983,
+77.02025858,
+0.03950329181 
+],
+[
+ "fiat punto",
+new Date(0000,0,1),
+0.5901700258,
+0.0004135659953,
+"Fiat",
+0.002064715923,
+8,
+0.02096157752,
+6890.085789,
+0.02249275954 
+],
+[
+ "ford fiesta",
+new Date(0000,0,1),
+0.4112014771,
+0.001080255593,
+"Ford",
+0.002671007071,
+9,
+0.02042710474,
+9229.486033,
+0.02311690772 
+],
+[
+ "ford escort",
+new Date(0000,0,1),
+0.5614072084,
+0.001728244334,
+"Ford",
+0.0007115337723,
+10,
+0.04532275898,
+2448.407309,
+0.05136649041 
+],
+[
+ "ford mondeo",
+new Date(0000,0,1),
+0.7872484326,
+0.0008657555283,
+"Ford",
+0.002330797366,
+11,
+0.03688883974,
+7951.223392,
+0.04113669407 
+],
+[
+ "honda civic",
+new Date(0000,0,1),
+0.5002596378,
+0.0002377273406,
+"Honda",
+0.0008595464521,
+12,
+0.0476537997,
+2762.330661,
+0.04844876075 
+],
+[
+ "honda accord",
+new Date(0000,0,1),
+0.7580595016,
+8.199541938e-05,
+"Honda",
+0.0004552548159,
+13,
+0.01396160087,
+1477.805462,
+0.01435971853 
+],
+[
+ "hyundai pony",
+new Date(0000,0,1),
+0.4322941899,
+8.986777594e-05,
+"Hyundai",
+0.0002770056084,
+14,
+0.0478733263,
+884.148625,
+0.04813485252 
+],
+[
+ "hyundai sonata",
+new Date(0000,0,1),
+0.7667948604,
+8.553731753e-05,
+"Hyundai",
+9.461107047e-05,
+15,
+0.03856134105,
+303.0782276,
+0.03899736863 
+],
+[
+ "hyundai lantra",
+new Date(0000,0,1),
+0.6018881798,
+0.0001089730247,
+"Hyundai",
+0.0002576932455,
+16,
+0.03856134105,
+825.4976055,
+0.03899736863 
+],
+[
+ "kia pride",
+new Date(0000,0,1),
+0.3129818439,
+6.580173745e-05,
+"Kia",
+0.000237503048,
+17,
+0.02155874365,
+758.6094334,
+0.02169380484 
+],
+[
+ "lancia Y10",
+new Date(0000,0,1),
+0.4256893992,
+0.0005733623026,
+"Fiat",
+0.000255840039,
+18,
+0.02096157752,
+853.7541642,
+0.02249275954 
+],
+[
+ "mazda 121",
+new Date(0000,0,1),
+0.409070909,
+0.0001264350185,
+"Mazda",
+9.16361863e-05,
+19,
+0.02147554965,
+294.4423097,
+0.02181269759 
+],
+[
+ "mazda 323",
+new Date(0000,0,1),
+0.4994073808,
+0.0004441903183,
+"Mazda",
+0.001558985613,
+20,
+0.04737175149,
+5054.259964,
+0.04884125019 
+],
+[
+ "mazda 626",
+new Date(0000,0,1),
+0.7028775811,
+0.0004009525586,
+"Mazda",
+0.001392977323,
+21,
+0.0379739216,
+4563.910971,
+0.03980465784 
+],
+[
+ "mazda xedos",
+new Date(0000,0,1),
+1.102147818,
+0.0002557012408,
+"Mazda",
+6.344793953e-05,
+22,
+0.0379739216,
+207.8790104,
+0.03980465784 
+],
+[
+ "mercedes C",
+new Date(0000,0,1),
+1.010831237,
+4.674712893e-05,
+"Mercedes",
+0.0059864911,
+23,
+0.002794086657,
+33060.97788,
+0.00297002552 
+],
+[
+ "mercedes E",
+new Date(0000,0,1),
+1.317293525,
+3.58716241e-05,
+"Mercedes",
+0.004428285784,
+24,
+0.002794086657,
+24455.63785,
+0.00297002552 
+],
+[
+ "mitsubishi colt",
+new Date(0000,0,1),
+0.4778885543,
+0.00014380359,
+"Mitsubishi",
+0.0004852475006,
+25,
+0.04779142544,
+1552.845552,
+0.04825281315 
+],
+[
+ "mitsubishi lancer",
+new Date(0000,0,1),
+0.6101335287,
+0.0003133272705,
+"Mitsubishi",
+5.974152646e-05,
+26,
+0.03822014113,
+193.8938329,
+0.03947410386 
+],
+[
+ "mitsubishi galant",
+new Date(0000,0,1),
+0.8984645605,
+0.0002127757528,
+"Mitsubishi",
+0.0003695196294,
+27,
+0.03822014113,
+1199.292712,
+0.03947410386 
+],
+[
+ "nissan micra",
+new Date(0000,0,1),
+0.3983114958,
+0.0002232156378,
+"Nissan",
+0.001015557181,
+28,
+0.02137616113,
+3288.270476,
+0.02195124316 
+],
+[
+ "nissan sunny",
+new Date(0000,0,1),
+0.5112320781,
+0.0002245917959,
+"Nissan",
+5.003657644e-05,
+29,
+0.04766505744,
+160.7958589,
+0.04843260791 
+],
+[
+ "nissan primera",
+new Date(0000,0,1),
+0.7113998532,
+0.00027622302,
+"Nissan",
+0.001029651305,
+30,
+0.03820565263,
+3344.619207,
+0.03949348785 
+],
+[
+ "nissan maxima",
+new Date(0000,0,1),
+0.9650451541,
+6.486737791e-06,
+"Nissan",
+5.579127042e-05,
+31,
+0.0029016516,
+178.066128,
+0.002941986133 
+],
+[
+ "opel corsa",
+new Date(0000,0,1),
+0.3832909167,
+0.1041648316,
+"GeneralMotors",
+0.005473104121,
+32,
+-0.0797238151,
+19300.25515,
+0.1339239037 
+],
+[
+ "opel vectra",
+new Date(0000,0,1),
+0.751454711,
+0.09778187324,
+"GeneralMotors",
+0.004588929529,
+33,
+-0.1429414072,
+16158.35654,
+0.2237879296 
+],
+[
+ "opel omega",
+new Date(0000,0,1),
+1.068484664,
+0.02983487005,
+"GeneralMotors",
+0.001381029017,
+34,
+-0.06702926669,
+4759.076901,
+0.1099410055 
+],
+[
+ "opel astra",
+new Date(0000,0,1),
+0.5451082587,
+0.1216620172,
+"GeneralMotors",
+0.01122770056,
+35,
+-0.1189662694,
+41287.04702,
+0.2068457368 
+],
+[
+ "peugeot 106",
+new Date(0000,0,1),
+0.3675246239,
+0.0007741013421,
+"Peugeot",
+0.0004568641795,
+36,
+0.02085358851,
+1535.425715,
+0.02262559699 
+],
+[
+ "peugeot 306",
+new Date(0000,0,1),
+0.530513823,
+0.0003096272437,
+"Peugeot",
+0.001118605218,
+37,
+0.04752953217,
+3612.484098,
+0.04862206078 
+],
+[
+ "renault clio",
+new Date(0000,0,1),
+0.410136193,
+0.001134362076,
+"Renault",
+0.002257937089,
+38,
+0.02037092989,
+7835.724731,
+0.02317591339 
+],
+[
+ "renault safrane",
+new Date(0000,0,1),
+1.103639245,
+1.648727115e-05,
+"Renault",
+1.760546208e-05,
+39,
+0.01407823862,
+56.23294754,
+0.01419669644 
+],
+[
+ "renault twingo",
+new Date(0000,0,1),
+0.36113289,
+0.001288287376,
+"Renault",
+0.002675298708,
+40,
+0.02037092989,
+9284.095803,
+0.02317591339 
+],
+[
+ "rover mini",
+new Date(0000,0,1),
+0.4452907145,
+3.604508248e-05,
+"BMW",
+0.0001044135577,
+41,
+0.02157088998,
+334.2310005,
+0.02167592355 
+],
+[
+ "rover 200",
+new Date(0000,0,1),
+0.5111255646,
+0.0002250708831,
+"BMW",
+0.0004906608144,
+42,
+0.04766445176,
+1582.043724,
+0.04843091582 
+],
+[
+ "rover 400",
+new Date(0000,0,1),
+0.5816476941,
+0.0001977820652,
+"BMW",
+0.0003009509876,
+43,
+0.04766445176,
+970.359986,
+0.04843091582 
+],
+[
+ "rover 600",
+new Date(0000,0,1),
+0.8202723861,
+0.001886739822,
+"BMW",
+4.935381614e-05,
+44,
+0.01002821459,
+229.6374334,
+0.01691698073 
+],
+[
+ "seat ibiza",
+new Date(0000,0,1),
+0.423771888,
+0.05224155672,
+"VW",
+0.0007905876615,
+45,
+-0.0358823152,
+3076.257931,
+0.07659510889 
+],
+[
+ "seat toledo",
+new Date(0000,0,1),
+0.6690013409,
+0.04122054481,
+"VW",
+0.0008817361619,
+46,
+-0.03356978375,
+3934.643437,
+0.08889303739 
+],
+[
+ "suzuki swift",
+new Date(0000,0,1),
+0.3615590334,
+6.57535724e-05,
+"Suzuki",
+0.0002856864179,
+47,
+0.02155024637,
+913.1441243,
+0.02170604669 
+],
+[
+ "toyota corolla",
+new Date(0000,0,1),
+0.5352010727,
+0.0003295956355,
+"Toyota",
+0.001239356255,
+48,
+0.04749626299,
+4003.650043,
+0.04866913531 
+],
+[
+ "toyota camry",
+new Date(0000,0,1),
+1.036312938,
+1.088183873e-05,
+"Toyota",
+2.599366008e-05,
+49,
+0.01409659726,
+82.89543323,
+0.01417012803 
+],
+[
+ "VW polo",
+new Date(0000,0,1),
+0.4431601465,
+0.04995598837,
+"VW",
+0.004546500853,
+50,
+-0.0358823152,
+17690.90259,
+0.07659510889 
+],
+[
+ "VW golf",
+new Date(0000,0,1),
+0.5731253624,
+0.06608952444,
+"VW",
+0.01527866374,
+51,
+-0.050901239,
+65093.81991,
+0.1221198533 
+],
+[
+ "VW passat",
+new Date(0000,0,1),
+0.8053583503,
+0.0342414029,
+"VW",
+0.006660570593,
+52,
+-0.03356978375,
+29722.00926,
+0.08889303739 
+],
+[
+ "audi A6",
+new Date(0000,0,1),
+1.113226771,
+0.01289685016,
+"VW",
+0.003375420629,
+53,
+-0.02326290835,
+12844.50365,
+0.05230115852 
+],
+[
+ "audi A8",
+new Date(0000,0,1),
+1.891952872,
+0.0006387621412,
+"VW",
+0.0003462570105,
+54,
+-0.0002482033043,
+1139.390503,
+0.007280625623 
+],
+[
+ "audi A4",
+new Date(0000,0,1),
+0.8735368252,
+0.03156890351,
+"VW",
+0.004624189222,
+55,
+-0.03356978375,
+20634.89801,
+0.08889303739 
+],
+[
+ "lancia kappa",
+new Date(0000,0,1),
+1.088725209,
+7.187031803e-06,
+"Fiat",
+5.349914655e-05,
+56,
+0.002897545667,
+172.0759397,
+0.002947573408 
+],
+[
+ "mitsubishi carisma",
+new Date(0000,0,1),
+0.7028775811,
+0.0002719840245,
+"Mitsubishi",
+0.0005862472568,
+57,
+0.03822014113,
+1902.692053,
+0.03947410386 
+],
+[
+ "kia sephia",
+new Date(0000,0,1),
+0.4514693916,
+3.944426116e-05,
+"Kia",
+0.000121385028,
+58,
+0.04793101852,
+386.7483034,
+0.04805111805 
+],
+[
+ "renault laguna",
+new Date(0000,0,1),
+0.7073517442,
+0.0003904335208,
+"Renault",
+0.001383662521,
+59,
+0.03798925746,
+4536.170116,
+0.03978223976 
+],
+[
+ "seat cordoba",
+new Date(0000,0,1),
+0.5537371039,
+0.06840354814,
+"VW",
+0.0005462082419,
+60,
+-0.050901239,
+2327.087076,
+0.1221198533 
+],
+[
+ "fiat brava/o",
+new Date(0000,0,1),
+0.5273179412,
+0.0001977017316,
+"Fiat",
+0.0007180199951,
+61,
+0.04769402391,
+2306.903103,
+0.04839110683 
+],
+[
+ "peugeot 406",
+new Date(0000,0,1),
+0.72226578,
+0.0005505566596,
+"Peugeot",
+0.0009321141185,
+62,
+0.03765939742,
+3091.360732,
+0.04021053017 
+],
+[
+ "skoda felicia",
+new Date(0000,0,1),
+0.3406793475,
+0.06498340239,
+"VW",
+0.0008731041209,
+63,
+-0.0358823152,
+3397.337964,
+0.07659510889 
+],
+[
+ "suzuki baleno",
+new Date(0000,0,1),
+0.4644659162,
+0.0001069765657,
+"Suzuki",
+0.0002703243111,
+64,
+0.03860455566,
+864.4910159,
+0.03893544069 
+],
+[
+ "nissan almera",
+new Date(0000,0,1),
+0.5197544098,
+0.0002209091994,
+"Nissan",
+0.000756498415,
+65,
+0.04766505744,
+2431.057859,
+0.04843260791 
+],
+[
+ "renault mégane",
+new Date(0000,0,1),
+0.5432972908,
+0.0005841523842,
+"Renault",
+0.002169470861,
+66,
+0.04710997122,
+7097.271438,
+0.04919291797 
+],
+[
+ "audi A3",
+new Date(0000,0,1),
+0.7116129398,
+0.05322778793,
+"VW",
+0.002989417215,
+67,
+-0.050901239,
+12736.23068,
+0.1221198533 
+],
+[
+ "citroen saxo",
+new Date(0000,0,1),
+0.3643287718,
+0.0007808916742,
+"Peugeot",
+0.0005503048037,
+68,
+0.02085358851,
+1849.460266,
+0.02262559699 
+],
+[
+ "kia clarus",
+new Date(0000,0,1),
+0.5750429034,
+0.0001376911767,
+"Kia",
+0.0002430626676,
+69,
+0.03852441564,
+779.7396002,
+0.03905001099 
+],
+[
+ "volvo S40/V40",
+new Date(0000,0,1),
+0.7709069252,
+0.0008841076146,
+"Ford",
+0.0009039746403,
+70,
+0.03688883974,
+3083.796305,
+0.04113669407 
+],
+[
+ "alfa romeo 156",
+new Date(0000,0,1),
+0.7797914147,
+0.0001166544575,
+"Fiat",
+0.000601072909,
+71,
+0.01388517323,
+1969.154416,
+0.01446243887 
+],
+[
+ "citroen xsara",
+new Date(0000,0,1),
+0.530513823,
+0.0007495530143,
+"Peugeot",
+0.0007005120702,
+72,
+0.03765939742,
+2323.251481,
+0.04021053017 
+],
+[
+ "daewoo lanos",
+new Date(0000,0,1),
+0.4367684126,
+6.330427646e-05,
+"Daewoo",
+0.0001990733967,
+73,
+0.04790403451,
+634.7664684,
+0.0480903568 
+],
+[
+ "daewoo nubira",
+new Date(0000,0,1),
+0.5750429034,
+4.463229243e-05,
+"Daewoo",
+0.0001364545233,
+74,
+0.03866983636,
+435.2610087,
+0.03884120246 
+],
+[
+ "fiat marea",
+new Date(0000,0,1),
+0.6719841957,
+0.0001475301947,
+"Fiat",
+0.0005029017313,
+75,
+0.03847018074,
+1618.27194,
+0.03912621332 
+],
+[
+ "fiat palio",
+new Date(0000,0,1),
+0.5155997872,
+0.0004733792763,
+"Fiat",
+0.0004467203121,
+76,
+0.02096157752,
+1490.733539,
+0.02249275954 
+],
+[
+ "ford ka",
+new Date(0000,0,1),
+0.3728510737,
+0.001191367618,
+"Ford",
+0.001861789807,
+77,
+0.02042710474,
+6433.289978,
+0.02311690772 
+],
+[
+ "mercedes A",
+new Date(0000,0,1),
+0.6672968864,
+0.001103034069,
+"Mercedes",
+0.004898853938,
+78,
+0.04596350667,
+16594.62158,
+0.05062378085 
+],
+[
+ "saab 9.5",
+new Date(0000,0,1),
+1.160951734,
+-0.001236660291,
+"GeneralMotors",
+0.0001863935625,
+79,
+0.006692645179,
+602.947424,
+-0.002468984108 
+],
+[
+ "seat arosa",
+new Date(0000,0,1),
+0.361985147,
+0.06115859534,
+"VW",
+0.0008665691295,
+80,
+-0.0358823152,
+3371.90964,
+0.07659510889 
+],
+[
+ "skoda octavia",
+new Date(0000,0,1),
+0.5294485092,
+0.0520855178,
+"VW",
+0.00188319922,
+81,
+-0.03356978375,
+8403.553999,
+0.08889303739 
+],
+[
+ "volvo S70/V70",
+new Date(0000,0,1),
+1.091771841,
+9.990003746e-05,
+"Ford",
+0.0005783955133,
+82,
+0.01383715304,
+1898.097958,
+0.01452807948 
+],
+[
+ "alfa romeo 166",
+new Date(0000,0,1),
+1.118553281,
+6.995377723e-06,
+"Fiat",
+0.0001742501829,
+83,
+0.002897545667,
+560.4624729,
+0.002947573408 
+],
+[
+ "daewoo matiz",
+new Date(0000,0,1),
+0.3174560666,
+5.737875509e-05,
+"Daewoo",
+0.0002140453548,
+84,
+0.0215651039,
+683.3568409,
+0.02168461791 
+],
+[
+ "daihatsu sirion",
+new Date(0000,0,1),
+0.3577239811,
+0.0003451790636,
+"Toyota",
+0.000144403804,
+85,
+0.02128378071,
+470.7189497,
+0.02207704091 
+],
+[
+ "ford focus",
+new Date(0000,0,1),
+0.5507543087,
+0.001761672695,
+"Ford",
+0.005507583516,
+86,
+0.04532275898,
+18951.74658,
+0.05136649041 
+],
+[
+ "hyundai atos",
+new Date(0000,0,1),
+0.3406793475,
+6.184629485e-05,
+"Hyundai",
+0.0002398439405,
+87,
+0.021557474,
+766.1409485,
+0.0216956403 
+],
+[
+ "kia shuma",
+new Date(0000,0,1),
+0.4770363271,
+0.0001659796739,
+"Kia",
+0.0001851255791,
+88,
+0.03852441564,
+593.8787164,
+0.03905001099 
+],
+[
+ "mazda demio",
+new Date(0000,0,1),
+0.4685140252,
+0.0001103934678,
+"Mazda",
+0.0004419897586,
+89,
+0.02147554965,
+1420.186617,
+0.02181269759 
+],
+[
+ "MCC smart",
+new Date(0000,0,1),
+0.3404662907,
+0.0004576097589,
+"Daimler",
+0.001846183858,
+90,
+0.02119741416,
+6058.232465,
+0.02219160073 
+],
+[
+ "peugeot 206",
+new Date(0000,0,1),
+0.425902456,
+0.0006679963934,
+"Peugeot",
+0.002138210193,
+91,
+0.02085358851,
+7186.080812,
+0.02262559699 
+],
+[
+ "saab 9.3",
+new Date(0000,0,1),
+0.8426434398,
+-0.01364947171,
+"GeneralMotors",
+0.0002000487686,
+92,
+0.04510956787,
+689.3754307,
+-0.02641600839 
+],
+[
+ "toyota avensis",
+new Date(0000,0,1),
+0.72226578,
+0.0002757946677,
+"Toyota",
+0.001009656181,
+93,
+0.03819833983,
+3280.967929,
+0.03950329181 
+],
+[
+ "volvo S80",
+new Date(0000,0,1),
+1.16261363,
+2.792737365e-05,
+"Ford",
+0.0003206534991,
+94,
+0.002832879727,
+1039.494163,
+0.003038832561 
+],
+[
+ "honda logo",
+new Date(0000,0,1),
+0.4143973589,
+4.923378317e-05,
+"Honda",
+0.0002158010241,
+95,
+0.02155925791,
+689.2530054,
+0.02169306477 
+],
+[
+ "rover 75",
+new Date(0000,0,1),
+0.9566293359,
+0.001617805891,
+"BMW",
+0.0002345769325,
+96,
+0.01002821459,
+1091.458552,
+0.01691698073 
+],
+[
+ "toyota yaris",
+new Date(0000,0,1),
+0.4114145339,
+0.0003001323937,
+"Toyota",
+0.0008468666179,
+97,
+0.02128378071,
+2760.565539,
+0.02207704091 
+],
+[
+ "VW lupo",
+new Date(0000,0,1),
+0.3930915594,
+0.05631894808,
+"VW",
+0.002976152158,
+98,
+-0.0358823152,
+11580.51425,
+0.07659510889 
+],
+[
+ "VW bora",
+new Date(0000,0,1),
+0.7052211761,
+0.05371021735,
+"VW",
+0.002066715435,
+99,
+-0.050901239,
+8805.115724,
+0.1221198533 
+] 
+];
+data.addColumn('string','brand');
+data.addColumn('date','.TIME.VAR');
+data.addColumn('number','price.pre.merger');
+data.addColumn('number','price.change.relative');
+data.addColumn('string','firm.pre.merger');
+data.addColumn('number','market.share.pre.merger');
+data.addColumn('number','X');
+data.addColumn('number','market.share.change.relative');
+data.addColumn('number','profit.pre.merger');
+data.addColumn('number','relative.profit.change');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartMergerSimulationNestedLogit() {
+var data = gvisDataMergerSimulationNestedLogit();
+var options = {};
+options["width"] =    600;
+options["height"] =    500;
+
+    var chart = new google.visualization.MotionChart(
+    document.getElementById('MergerSimulationNestedLogit')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "motionchart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartMergerSimulationNestedLogit);
+})();
+function displayChartMergerSimulationNestedLogit() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+
+<!-- jsChart -->  
+
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMergerSimulationNestedLogit"></script>
+ 
+
+<!-- divChart -->
+
+<div id="MergerSimulationNestedLogit"
+  style="width: 600px; height: 500px;">
+</div>
+
+<p>In one problem set later in class, you will perform this analysis yourself with R.</p>
+
+</body>
+
+</html>
+
