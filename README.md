@@ -13,7 +13,7 @@ If you like R programming, take a look at the folder `rtutor` that contains RTut
 See [https://github.com/skranz/RTutor](https://github.com/skranz/RTutor) for more details about RTutor.
 
 
-To install all required R packages run the code in `install packages.r` in the folder R.
+To install all required R packages run the code in `install packages.r` in the `r`  folder.
 
 The folder `slides` contains some lecture slides. Often I do some live programming in the class. The code is either part of the RTutor problem sets (early slides) or in the folder `r` (later slides). Alternatively, I show details on the black board. So stand-alone the slides have only limited use.
 
