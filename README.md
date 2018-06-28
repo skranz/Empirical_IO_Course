@@ -2,9 +2,9 @@
 ## Sebastian Kranz, Ulm University
 
 
-This Github repository contains material from the 2018 edition of my Master level course "Empirical Industrial Organisation and Consumer Choice" that I teach regularly at Ulm University.
+This Github repository contains material from the [2018 edition](https://www.uni-ulm.de/mawi/mawi-wiwi/forschung-und-lehre/lehrveranstaltungen/sommersemester-2018/empirical-industrial-organization-and-consumer-choice/) of my master level course "Empirical Industrial Organisation and Consumer Choice" that I teach regularly at [Ulm University](https://www.uni-ulm.de/en/).
 
-Since we have quite a heterogeneous composition in our class and not every student has heard yet an econometrics class, the course starts at a very basic level and ends already at the famous BLP model that allows to estimate demand functions for differentiated products.
+We have quite a heterogeneous composition in the class and not every student has heard yet an econometrics class. Hence, the course starts at a very basic level and ends already at the famous BLP model that allows to estimate demand functions for differentiated products.
 
 We also have a mini-excursion to machine learning in exercise sheet 4 and 5. Main goal is to contrast the approach to pure prediction problems of machine learning  with the estimation of causal relationships with structural econometric models.
 
