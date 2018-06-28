@@ -1,6 +1,7 @@
 ## Empirical Industrial Organisation and Consumer Choice
 ## Sebastian Kranz, Ulm University
 
+
 This Github repository contains material from the 2018 edition of my Master level course "Empirical Industrial Organisation and Consumer Choice" that I teach regularly at Ulm University.
 
 Since we have quite a heterogeneous composition in our class and not every student has heard yet an econometrics class, the course starts at a very basic level and ends already at the famous BLP model that allows to estimate demand functions for differentiated products.
@@ -24,6 +25,8 @@ The folder `slides` contains some lecture slides. Often I do some live programmi
 
 
 ## Sources & Attributions
+
+- The exercises and sample solutions in the `exercise` folder have been created by Martin Kies with some input by me.
 
 - The data folder, contains a set about car sales, which was made available on [Frank Verbooven's Website](https://sites.google.com/site/frankverbo/data-and-software).
 
