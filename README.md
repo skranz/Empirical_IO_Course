@@ -17,6 +17,8 @@ To install the required R packages for this course, run the code in `install pac
 
 The folder `slides` contains some lecture slides. Often I do some live programming in the class. The code is either part of the RTutor problem sets (early slides) or in the folder `r` (later slides). Alternatively, I show details on the black board. So stand-alone the slides have only limited use.
 
+The folder `exercises`` contains the problem sets and sample solutions for the exercise classes of the course. These are additional problem sets to the RTutor problem sets.
+
 ## License
 
 - Except for the RTutor problem sets, you can use all materials under a [Creative Commmons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) license](https://ocw.mit.edu/terms/#cc) license.

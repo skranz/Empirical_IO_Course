@@ -1,0 +1,378 @@
+---
+title: "Predicting House Prices"
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error=TRUE, dev='svg')
+```
+
+This exercise shall give you a small glimpse into the `machine learning` approach to deal with a pure prediction problem. We don't care in this exercise about causal effects. 
+
+A good source for this approach is the textbook "An Introduction to Statistical Learning" by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani. You can find a legal free online version here:
+[http://www-bcf.usc.edu/~gareth/ISL](http://www-bcf.usc.edu/~gareth/ISL/)
+You don't need to look at the book for this course, but it may be helpful if you face a pure prediction problem outside of this course.
+
+An interesting website for prediction problems is [https://www.kaggle.com/competitions](https://www.kaggle.com/competitions), where a lot of *prediction competions* are hosted. There firms and other organizations offer money for algorithms that yield the best predictions for provided data sets, like [this competition](https://www.kaggle.com/c/zillow-prize-1) that offers a total of 1 200 000 US-Dollar for prediction algorithms for home values.
+
+We will look at a lot of methods in this exercise to give you an overview of what is done in practice. Don't worry if you feel a bit overwhelmed, at the end of this exercise we select only a few of the covered issus that you should know for the exam.
+
+## Part 1: Comparing out-of-sample prediction performance of linear regression models
+
+a\) The data set "Boston" from the package `MASS` contains information about values of owner occupied homes and various explanatory variables for 506 different Boston suburbs. Take a look at the help for this package to get a description of the variables.
+```{r eval=FALSE}
+? MASS::Boston
+```
+
+Load the data. Use the function `skim` from the package `skimr` to get a first descriptive overview of the data set.
+```{r}
+dat <- MASS::Boston
+skimr::skim(dat)
+```
+
+In this exercise, we want to generate a model that allows us to predict the median house price `medv` in a suburb using the other variables. We are not interested in causal effects, but only in prediction quality.
+
+To measure out-of-sample prediction accuracy, we will first separate our data set into a training and test data set. As a general strategy one should first specify, estimate and tune **all** models using the training data set. Only, once all models are estimated, one compares the prediction quality on the test data set. (For educational purposes, we will slightly deviate from this procedure in this problem set and will show you the prediction accurracy on the test data for some models before we have estimated all models.)
+
+
+b\) Randomly select 75% of observations and store them in the training data set with name `train`. Store the remaining 25% of observations in a test data set `test`.
+
+For simpler way to replicate our results first set a specific random seed, e.g. 1234567 with the function `set.seed`. 
+
+```{r}
+set.seed(1234567)
+
+n <- NROW(dat) # Number of observations
+n.train <- round(n*0.75) # Number of training observations
+
+# Randomly draw rows of training data set
+train.rows <- sample.int(n,n.train,replace = FALSE)
+
+train <- dat[train.rows,]
+test <- dat[-train.rows,]
+```
+
+c\) Estimate 3 regression model with the training data set. The first model shall contain all variables as explanatory variables (simple fomula `medv ~ .`). The second model shall also include interaction effects of two variables (simple fomula `medv ~ .^2`). The third model shall also include all interaction effects of three variables.
+
+Show a summary of both regression models. If you would (wrongfully) think adjusted R-squared would be a good criterion in this situation to pick a model, which model would you choose?
+
+```{r}
+reg1 <- lm(medv ~ ., data=train)
+summary(reg1)
+reg2 <- lm(medv ~ .^2, data=train)
+summary(reg2)
+reg3 <- lm(medv ~ .^3, data=train)
+summary(reg3)
+```
+
+d\) In many aspects a sensible way to assess prediction accuracy of a model is to see how well it predicts out-off sample data in the test data set. Compute for all three models models the predicted values `y.hat` for each observation of your test data set. You can use the generic function `predict`. Take a look at the help for `predict.lm` for the exact syntax. Then compute for each model the root mean squared prediction error $$rmse = \sqrt {\frac 1 T \sum_{t=1}^T (y_t-\hat{y}_t)^2}.$$
+
+Which model has in our example the best out-of-sample prediction accuracy? Visualise the out-of-sample prediction of each regression by showing them in a plot of `y.hat` vs. the true value `y`of the test data set. 
+
+```{r}
+# True values of y in test data set
+y <- test$medv
+
+# Predicted value with model reg1
+y.hat1 <- predict(reg1, newdata=test)
+# Root Mean Squared Prediction Error
+rmse.reg1 <- sqrt(mean( (y-y.hat1)^2))
+
+# The same computations for reg2 and reg3
+
+y.hat2 <- predict(reg2, newdata=test)
+rmse.reg2 <- sqrt(mean( (y-y.hat2)^2))
+
+y.hat3 <- predict(reg3, newdata=test)
+rmse.reg3 <- sqrt(mean( (y-y.hat3)^2))
+
+c(rmse.reg1, rmse.reg2, rmse.reg3)
+
+library(ggplot2)
+library(tidyr)
+#Data preparation for visualisation
+vis.dat <- data.frame(y=y,y.hat1=y.hat1, y.hat2=y.hat2, y.hat3=y.hat3)
+# Convert to 'long' format for simplee usage with ggplot
+vis.dat.long <- gather(vis.dat, type, y.hat, -y)
+
+ggplot(vis.dat.long, aes(x=y,y=y.hat, color=type, shape=type)) + geom_point() + geom_abline(slope=1,intercept=0,colour="black") + facet_wrap(~type)
+
+#same view without reg3
+ggplot(filter(vis.dat.long,type!="y.hat3"), aes(x=y,y=y.hat, color=type, shape=type)) + geom_point()+ geom_abline(slope=1,intercept=0,colour="black")+ facet_wrap(~type)
+
+```
+
+The big model reg3 is a stark example of overfitting. It has a large number of variables and can very well explain the training data. Yet, it does not generalize at all well to out-of-sample observations. 
+
+How can we find the optimal number of variables and which variables would that be? One popular approach to approach this problem in prediction problems are so called LASSO regressions explained in chapter 6 of the textbook "An Introduction to Statistical Learning".
+
+We will illustrate LASSO regressions further below, but first we want to show you a two different prediction methods: regression trees and random forests.
+
+## Part 2: Regression Trees and Random Forests
+
+a\) Fitting a regression tree
+
+Use the function `rpart` from the package `rpart` to fit a [regression tree](https://en.wikipedia.org/wiki/Decision_tree_learning). Set the complexity parameter of the tree to 0.04. Show a plot of the tree with the function `rpart.plot` from the package `rpart.plot`. How does the tree change, if you change the complexity parameter `cp`?
+
+Based on the plot, try to explain, how one would predict an expected median house value for a suburb based on the estimated tree. We won't explain in this course how the tree is estimated, but just note that it is one machine learning method to make predictions.
+
+```{r}
+library(rpart)
+library(rpart.plot)
+
+# Grow tree 
+mod.tree <- rpart(medv ~ ., data=train, control=rpart.control(cp=0.04),  method="anova")
+mod.tree
+rpart.plot(mod.tree, cex=1)
+```
+
+
+b\) Evaluate the RMSE of the regression tree prediction on your test data set. How does it compare to your regression models?
+
+```{r}
+y.hat3.tree <- predict(mod.tree, newdata=test)
+
+# Root Mean Squared Prediction Error
+rmse.tree <- sqrt(mean( (y-y.hat3.tree)^2,na.rm = TRUE))
+
+c(rmse.reg1, rmse.reg2, rmse.reg3, rmse.tree)
+
+
+#Data preparation for visualisation
+vis.dat <- data.frame(y=y,y.hat1=y.hat1, y.hat2=y.hat2, y.hat3.tree=y.hat3.tree)
+vis.dat.wide <- gather(vis.dat, type, y.hat, -y)
+ggplot(vis.dat.wide, aes(x=y,y=y.hat, color=type, shape=type)) + geom_point() + geom_abline(slope=1,intercept=0,colour="black")+ facet_wrap(~type)
+
+```
+
+c\) Even if one 'tunes' the parameters of a regression tree (more on tuning in an exercise below), its prediction quality is often not very good. However, the machine learning method [random forest](https://en.wikipedia.org/wiki/Random_forest) is based on regression trees and has very often very good prediction power. The key idea of a random forest is that one trains many regression trees (e.g. 500 trees). Each tree is trained using a data set that is randomly drawn with replacement from the training data set. Furthermore, at each node where the tree is split, one randomly draws a subset of variables that can be used for splitting. The final prediction of the random forest is the mean of the prediction of all its trees.
+
+Use the R package `ranger` to estimate a regression random forest to predict median house prices in Boston suburbs. Compute and compare the prediction performance (RMSE) on the test data set.
+
+
+```{r}
+library(ranger)
+mod.forest <- ranger(medv ~ ., data=train)
+mod.forest
+
+# Predict on test data set
+y.hat4.forest <- predict(mod.forest, test)$predictions
+
+# Root Mean Squared Prediction Error
+rmse.forest <- sqrt(mean( (y-y.hat4.forest)^2,na.rm = TRUE))
+
+c(rmse.reg1, rmse.reg2, rmse.reg3, rmse.tree, rmse.forest)
+
+#Data preparation for visualisation
+vis.dat <- data.frame(y=y,y.hat1=y.hat1, y.hat2=y.hat2, y.hat3.tree=y.hat3.tree, y.hat4.forest=y.hat4.forest)
+vis.dat.wide <- gather(vis.dat, type, y.hat, -y)
+ggplot(vis.dat.wide, aes(x=y,y=y.hat, color=type, shape=type)) + geom_point() + geom_abline(slope=1,intercept=0,colour="black")+ facet_wrap(~type)
+
+```
+
+## Part 3: Parameter Tuning and Cross-Validation
+
+a\) **Parameter Tuning** Most machine learning methods have one or several parameters that affect the estimated model. One such paramater in our random forest is `mtry` (see help for ranger).
+
+While there are often some rules of thumb for sensible default values of parameters, good parameter choices can substantially differ between problems. Machine Learning therefore typically entails 'parameter tuning'.
+
+Implement the following approach to parameter tuning:
+
+1. Create a grid of some candidate values for you parameter `mtry`, e.g. `c(1,2,3,4,5,6)`
+
+2. Split your training data set again into a `tuning` (80% of data) and a `validation` data set (20% of data).
+
+3. Estimate for each candidate value of the parameter your model with the tuning data set and evaluation its prediction quality (RMSE) on the validation data set.
+
+4. Choose that value of `mtry` that has the lowest RMSE in the validation set. (Possibly adapt your grid of candidate values closer around your selected value and try again.)
+
+5. Finally estimate your model with the selected parameters from the tuning procedure on the whole training data set and evaluate the prediction accuracy on the test data set. Does tuning help here?
+
+```{r}
+# Split training data into a tuning and validation data set
+set.seed(1234567)
+tune.rows <- sample.int(NROW(train), round(0.8*NROW(train))) 
+
+tune <- train[tune.rows,]
+valid <- train[-tune.rows,]
+
+par.grid <- c(1,2,3,4,5,6)
+n <- length(par.grid)
+
+y.valid <- valid$medv
+
+rmse = numeric(n)
+
+for (i in 1:n) {
+  cat("\nTuning parameter ",i )
+  # Estimate model on tuning data set
+  # for currently considered tuning parameter
+  mod <- ranger(medv ~ ., mtry=par.grid[i], data=tune)
+  
+  # Evaluate on validation data set
+  y.hat.valid = predict(mod,valid)$predictions
+
+  # Root Mean Squared Prediction Error
+  rmse[i] = sqrt(mean( (y.valid-y.hat.valid)^2,na.rm = TRUE))
+}
+
+rmse
+
+# Select best parameters from the tuning grid
+best.i = which.min(rmse)
+par.grid[best.i]
+
+# Estimate model again on the training data set and evaluate on the test data set
+mod.forest2 <- ranger(medv ~ ., mtry=par.grid[best.i], data=train)
+
+# Evaluate on validation data set
+y.hat5.forest2 = predict(mod.forest2,test)$predictions
+
+# Root Mean Squared Prediction Error
+y <- test$medv
+rmse.forest2 = sqrt(mean( (y-y.hat5.forest2)^2,na.rm = TRUE))
+
+c(rmse.reg1, rmse.reg2, rmse.reg3, rmse.tree, rmse.forest, rmse.forest2)
+#Data preparation for visualisation
+
+vis.dat <- data.frame(y=y, y.hat2=y.hat2, y.hat3.tree=y.hat3.tree, y.hat4.forest=y.hat4.forest, y.hat5.forest2=y.hat5.forest2)
+vis.dat.wide <- gather(vis.dat, type, y.hat, -y)
+ggplot(vis.dat.wide, aes(x=y,y=y.hat, color=type, shape=type)) + geom_point() + geom_abline(slope=1,intercept=0,colour="black")+ facet_wrap(~type)
+
+```
+
+Note that in standard literature normally the words 'training data set' is only used for the 'tuning data set' but no special wording regarding the combination of tuning + validation data set exists.
+
+b\) **Parameter tuning via k-fold cross validation and the caret package**
+
+Instead of tuning the data by separating the training data into just one tuning and one validation set, one often uses [k-fold cross-validation](https://en.wikipedia.org/wiki/Cross-validation_(statistics)). It basically uses k different tuning and validation sets. Here is a brief  explanation how 5-fold cross validation works.
+
+1. We separate the training data into 5 randomly selected subsamples that each contain 20% of the rows.
+
+2. First we let the validation set be the first subsample and the tuning set the remaining subsample.
+
+3. We then estimate for each paramater on our grid the model on the tuning data set and compute the RMSE for the validation set.
+
+4. We repeat step 3 using the 2nd subsample as validation set and subsamples 1,3,4,5 as tuning data set. Then the 3rd subsample as validation set and so on.
+
+5. We take the average RMSE for all 5 different validation sets and pick that parameter that has the lowest RMSE.
+
+k-fold cross validation generally yield better tuning results than just using a single validation set, but the whole process takes k times as long. Often one uses 5-fold or 10-fold cross validation.
+
+Since parameter tuning via cross validation is very commonly done in machine learning, there are helper function to quickly perform it. The package `caret` implements a unified syntax for many machine learning algorithms implemented in different R packages.
+
+```{r messages=FALSE}
+set.seed(1234567)
+library(caret)
+grid <-  expand.grid(mtry = 2:7, min.node.size = c(3:6), splitrule="variance")
+
+fitControl <- trainControl(method = "CV",number = 5,verboseIter = TRUE)
+
+output.caret <- capture.output(fit <- train(
+  medv ~ ., 
+  data = train,
+  method = 'ranger',
+  num.trees = 500,
+  tuneGrid = grid,
+  trControl = fitControl,
+  importance = "permutation"
+))
+fit
+plot(fit)
+
+# Optimal tuning parameters
+par <- fit$bestTune
+
+# Evaluate best model on test data set
+y <- test$medv
+y.hat <- predict(fit,test)
+
+# Root Mean Squared Prediction Error
+rmse.forest3 <- sqrt(mean( (y-y.hat)^2,na.rm = TRUE))
+
+c(rmse.reg1, rmse.reg2, rmse.reg3, rmse.tree, rmse.forest, rmse.forest2, rmse.forest3)
+
+```
+
+## Part 4: Lasso / Ridge / Elastic Net Regression
+
+a\) LASSO / Ridge / Elastic Net
+
+When doing a linear regression we solve the problem
+$$\min_{\beta_0,\beta} \frac{1}{N} \sum_{i=1}^{N} l(y_i,\beta_0+\beta^T x_i)
+$$
+with $$l(y,x)$$, the loss function, being the Squared Error, or in other words $$l(y,x) = ||y-x||_2^2 = \left(\left(\sum_{i=1}^{N} |y_i-x_i|^2\right)^{1/2}\right)^2 = \sum_{i=1}^{N} |y_i-x_i|^2$$
+
+More generally we may solve the following problem:
+
+$$\min_{\beta_0,\beta} \frac{1}{N} \sum_{i=1}^{N} w_i l(y_i,\beta_0+\beta^T x_i) + \lambda\left[(1-\alpha)||\beta||_2^2/2 + \alpha ||\beta||_1\right],
+$$
+When choosing w as 1, l(y,x) as Squared Error and Lambda as 0, this approach is identical to an Ordinary Least Squares Regression. 
+Using this more flexible approach one tries to achieve a combination of the following results:
+1. With alpha=1 there exists a penalty on the *number* of parameters. This tends to shrink irrelevant parameters to 0, thus making the problem more approachable. This allows us to use a higher number of combinations of parameters while still somewhat limiting overfitting. This is called the LASSO method.
+2. With alpha=0 there exists a penalty on the *height* of the parameters, especially of the very important ones. If we have two parameters which are very similar one of them might - by chance - within the training data set be a better fit thus receiving a very big coefficient. Equalizing the parameters will thus prevent overfitting. This is called the RIDGE method. As the Betas strongly depend on the chosen unit of the input and output variables, it is necessary to standardize all variables beforehand. This is done automatically by the glmnet Package. 
+
+It is very not obvious on how to set alpha or lambda, thus a cross validation might be a good way to continue. Note that in our case we previously ran a very broad cross validation to pinpoint a good lambda/alpha area to save some computational time.
+
+We will set w = 1, i.e. every observation should be equally important.
+
+Use caret and glmnet to perform a elastic net regression on the dataset.
+
+```{r}
+set.seed(1234567)
+library(caret)
+grid <-  expand.grid(lambda=seq(0,0.005,by=0.001), alpha=seq(0.05,1,by=0.01))
+
+fitControl <- trainControl(method = "CV",number = 5,verboseIter = TRUE)
+
+output.caret <- capture.output(fit <- train(
+  medv ~ .^2, 
+  data = train,
+  method = 'glmnet',
+  tuneGrid = grid,
+  trControl = fitControl
+))
+#fit #Uncomment for details
+plot(fit)
+
+par = fit$bestTune
+par
+# Evaluate on validation data set
+y = test$medv
+y.hat = predict(fit,test)
+
+# Root Mean Squared Prediction Error
+rmse.glmnet = sqrt(mean( (y-y.hat)^2,na.rm = TRUE))
+
+c(rmse.reg1, rmse.reg2, rmse.reg3, rmse.tree, rmse.forest, rmse.forest2, rmse.forest3, rmse.glmnet)
+
+```
+
+## Closing Remarks and Additional Material
+
+There exist a lot of different prediction methods with very different approaches and varying complexity. Often used methods which are reasonably complex but may result in very good results (depending on the structure of the problem) are Neural Networks (see Bonus Exercise) and Gradient Boosting. A very good introduction to gradient boosting may be found with [with kaggle](http://blog.kaggle.com/2017/01/23/a-kaggle-master-explains-gradient-boosting/). If you want to experiment with gradient boosting, please see the Bonus Exercise, where we use caret to use this method.
+
+## Summary
+
+Key things to remember if your are only interested in prediction:
+
+- It is often worthwhile to try out more sophisticated machine learning methods like 'random forests' in addition to linear regressions.
+
+- In many cases easy to interpret algorithms (like a regression or a decision tree) tend to perform worse than more complicated "black box" solutions like random forests or neural networks.
+
+- Before running any estimation, split your data into a training data set and a test data set. Estimate and tune your models using the training data set only. Use the test data set to assess the out-of-sample prediction performance of your models.
+
+- Especially when trying to gauge which parameters or methods might be the best for a given data set, k-fold cross validation is a good way to minimize overfitting. 
+
+## What you need to know for the exam
+
+We showed you very briefly a lot of information about machine learning methods for prediction problems. We don't expect you to know everything for the exam. You should know, however, about the following topics for pure prediction problems:
+
+1. Why do we split the data into a training set and test set and what do we do with the two data sets?
+
+2. What is the key idea of k-fold cross validation for parameter tuning?
+
+3. You should be able to interpret a given regression tree and make a prediction based on a shown tree for a given data set. But you don't need to know how the trees are estimated.
+
+You don't need to know how random forests, LASSO, Ridge, elastic net or neural networks work. You also don't need to know any R code for any particular machine learning method of this exercise is called (except for the `lm` function for linear regressions, which we also use in other chapters).
